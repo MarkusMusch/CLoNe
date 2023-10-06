@@ -1,14 +1,15 @@
-import numpy as np
 import matplotlib
-import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-import mpl_toolkits.mplot3d.art3d as art3d
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.axes import Axes
 from matplotlib.gridspec import GridSpec
-from typing import Iterable
-from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.patches import Patch, Circle, Rectangle, Arrow, PathPatch
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+import mpl_toolkits.mplot3d.art3d as art3d
+from mpl_toolkits.mplot3d import Axes3D
+from typing import Iterable
+import numpy as np
+
 from .discretization import Discretization
 from .graph import Graph
 from .edge import Edge
@@ -109,7 +110,7 @@ One object will hold one graph and provide the facilities to plot it"""
           axTmp.get_yaxis().set_visible(False)
           if not i is (numConnectInEdges-1):
             axTmp.get_xaxis().set_visible(False)
-          if i is 0:
+          if i == 0:
             axTmp.set_title('Node ' + str(tmpNodeID) + ': ingoing')
 # Create a line object and add it to the dictionary
           lineTmp, = axTmp.plot([], [], 'o', markersize=2)
@@ -132,7 +133,7 @@ One object will hold one graph and provide the facilities to plot it"""
           if not i is (numConnectOutEdges-1):
             axTmp.get_xaxis().set_visible(False)
           axTmp.get_yaxis().set_visible(False)
-          if i is 0:
+          if i == 0:
             axTmp.set_title('Node ' + str(tmpNodeID) + ': outgoing')
 # Create a line object and add it to the dictionary
           lineTmp, = axTmp.plot([], [], 'o', markersize=2)
@@ -292,7 +293,7 @@ One object will hold one graph and provide the facilities to plot it"""
         yValue = yCoordIn + np.sin((i+(1/2))*piFrac-0.5*np.pi) + 1.
         self.checkPlotBoundsX(xValue)
         self.checkPlotBoundsY(yValue)
-        if i%2 is 0:
+        if i%2 == 0:
           dx     = xOld - xValue
           dy     = yOld - yValue
           arrow  = Arrow(xOld, yOld, -dx, -dy, width=0.05, facecolor=faceColor)
@@ -314,7 +315,7 @@ One object will hold one graph and provide the facilities to plot it"""
       for i in range(0, self._pltRefinement, 4):
         xValue = xSlope*(i+1)*lineFrac + xCoordIn
         yValue = ySlope*(i+1)*lineFrac + yCoordIn
-        if i%8 is 0:
+        if i%8 == 0:
           dx     = xOld - xValue
           dy     = yOld - yValue
           arrow  = Arrow(xOld, yOld, -dx, -dy, width=0.05, facecolor=faceColor)
@@ -445,7 +446,6 @@ One object will hold one graph and provide the facilities to plot it"""
   def saveAnimation3d(self, fileName: str):
     self._plotAnimation3d.save('./Plots/' + fileName + '.mp4', writer=self._writer)
 
-
   def showAnimations(self, name: str):
     self._animatedSolution = plt.figure()
     self._axAnimation      = Axes3D(self._animatedSolution)
@@ -479,7 +479,7 @@ One object will hold one graph and provide the facilities to plot it"""
       dataTmp = self._story[('ExactNode', timePoint, nodeID)]
       tmpAx3DPlot.plot(dataTmp[0,:], dataTmp[1,:], dataTmp[2,:], 'r')
     blue_patch = Patch(color='b', label='approximation')
-    red_patch   = Patch(color='r', label='exact solution')
+    red_patch = Patch(color='r', label='exact solution')
     tmpAx3DPlot.legend(handles=[blue_patch, red_patch])
     if self._plot3D is None:
       self._plot3D = [tmpPlot]
@@ -489,8 +489,8 @@ One object will hold one graph and provide the facilities to plot it"""
       self._ax3DPlot = [tmpAx3DPlot]
     else:
       self._ax3DPlot.append(tmpAx3DPlot)
-    plt.savefig('./Plots/' + name + '.png', dpi=400, quality=95)
-    plt.savefig('./Plots/' + name + '.pdf', dpi=400, quality=95)
+    plt.savefig('./Plots/' + name + '.png', dpi=400) # , quality=95)
+    plt.savefig('./Plots/' + name + '.pdf', dpi=400) # , quality=95)
 
 
   def showPlot(self):

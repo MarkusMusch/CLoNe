@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.integrate as integrate
+
 from .graph import Graph
 from .edge import Edge
 from .node import Node

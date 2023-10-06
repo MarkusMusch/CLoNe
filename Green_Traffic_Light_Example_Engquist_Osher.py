@@ -1,4 +1,5 @@
 import numpy as np
+
 from src import fluxcollection
 from src.clongraphplot import CLonGraphPlot
 from src.discretization import Discretization
@@ -187,7 +188,7 @@ for i in range(3,2+numGridLevels):
   
   errorL1New = np.round(discreteEquation.getL1Error(), decimals=5) 
   errorL1List.append(errorL1New)
-  if errorL1 is 0.:
+  if errorL1 == 0.:
     pass
   else:
     eoc = np.round(np.log(errorL1New/errorL1)/np.log(dXNew/dX), decimals = 2)
@@ -209,9 +210,9 @@ print('------------------------------------')
 
 # Plot the final state here
 streetsPlot = CLonGraphPlot(discreteEqn=discreteEquation, pltRefinement=100) 
-streetsPlot.showAnimations('Trafficlight switch to green')
-streetsPlot.saveAnimation3d('Traffic_Flow_Monotonous_Elementary_Waves_Example')
-streetsPlot.plot3D(0, 't=0.0')
-streetsPlot.plot3D(discreteEquation.getNumTimeSteps()-1, 't=0.1')
-streetsPlot.showPlot()
+# streetsPlot.showAnimations('Trafficlight switch to green')
+# streetsPlot.saveAnimation3d('Traffic_Flow_Monotonous_Elementary_Waves_Example')
+# streetsPlot.plot3D(0, 't=0.0')
+# streetsPlot.plot3D(discreteEquation.getNumTimeSteps()-1, 't=0.1')
+# streetsPlot.showPlot()
 #streetsPlot.saveAnimationProjection2d('complexNetworkProjectionAnimation50CellsDots')
